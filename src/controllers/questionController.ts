@@ -3,7 +3,6 @@ import Question from "../model/questionsModal";
 
 export async function getAllQuestions(req: Request, res: Response) {
   try {
-    // const data = await Subject.find({ exam: { $regex: exam, $options: "i" } });
     const questions = await Question.find({});
 
     res.status(201).json({ message: "successfull", data: questions });
@@ -14,7 +13,9 @@ export async function getAllQuestions(req: Request, res: Response) {
 }
 
 export async function getQuestionsbyQeury(req: Request, res: Response) {
-  const { examType, examYear, subject } = req.body;
+  const examType = req.params.examType;
+  const examYear = req.params.examYear;
+  const subject = req.params.subject;
 
   console.log(examType, examYear, subject);
 
@@ -26,6 +27,19 @@ export async function getQuestionsbyQeury(req: Request, res: Response) {
     });
 
     res.status(201).json({ message: "successfull", data: questions });
+  } catch (error) {
+    console.error("Error saving data:", error);
+    res.status(500).json({ message: "Failed to store data", error: error });
+  }
+}
+
+export async function uploadQuestions(req: Request, res: Response) {
+  const question = req.body;
+
+  try {
+    const newQuestion = await Question.create(question);
+
+    res.status(201).json({ message: "created", data: newQuestion });
   } catch (error) {
     console.error("Error saving data:", error);
     res.status(500).json({ message: "Failed to store data", error: error });
