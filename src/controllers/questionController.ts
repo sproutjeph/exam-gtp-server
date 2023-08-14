@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import Question from "../model/questionsModal";
+import Subject from "../model/subjectModal";
 
 export async function getAllQuestions(req: Request, res: Response) {
   try {
@@ -38,6 +39,27 @@ export async function uploadQuestions(req: Request, res: Response) {
 
   try {
     const newQuestion = await Question.create(question);
+
+    const subject = question.subject;
+    const examType = question.examType;
+    const examYear = question.examYear;
+
+    const newSubject = {
+      name: subject,
+      exam: examType,
+      examYears: [{ examYear: examYear, isActive: true }],
+    };
+
+    const existingsubject: any = await Subject.find({
+      exam: { $regex: examType, $options: "i" },
+      subject: { $regex: new RegExp(subject, "i") },
+    });
+    if (existingsubject) {
+      existingsubject.examYears.push({ examYear: examYear, isActive: true });
+      existingsubject.save();
+    } else {
+      await Subject.create(newSubject);
+    }
 
     res.status(201).json({ message: "created", data: newQuestion });
   } catch (error) {

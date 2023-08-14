@@ -8,7 +8,7 @@ export async function getAllSubject(req: Request, res: Response) {
     res.status(201).json({ message: "successfull", data: subjects });
   } catch (error) {
     console.error("Error saving data:", error);
-    res.status(500).json({ message: "Failed to store data", error: error });
+    res.status(500).json({ message: "Failed to fetch data", error: error });
   }
 }
 
