@@ -5,7 +5,8 @@
   "main": "build/server.js",
   "scripts": {
     "clean": "rimraf ./build",
-    "build": "npm-run-all format lint clean && tsc -b",
+    // "build": "npm-run-all format lint clean && tsc",
+    "build": "tsc",
     "dev": "nodemon",
     "lint": "eslint src",
     "start": "node build/src/server.js",
