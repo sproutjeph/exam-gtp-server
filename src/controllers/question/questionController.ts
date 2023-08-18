@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import Question from "../model/questionsModal";
-import Subject from "../model/subjectModal";
+import Question from "../../model/question/questionsModal";
+import Subject from "../../model/subject/subjectModal";
 
 export async function getAllQuestions(req: Request, res: Response) {
   try {

@@ -1,13 +1,15 @@
+import subjectRouter from "./routes/subject/subjectRoute";
+import questionRouter from "./routes/question/questionRoute";
 import compression from "compression";
 import bodyParser from "body-parser";
 import express from "express";
+import morgan from "morgan";
 import cors from "cors";
-import subjectRouter from "./routes/subjectRoute";
-import questionRouter from "./routes/questionRoute";
 
 const app = express();
 
 app.use(cors());
+app.use(morgan("combined"));
 
 app.use(express.json());
 app.use(compression());

@@ -3,7 +3,7 @@ import {
   getAllQuestions,
   getQuestionsbyQeury,
   uploadQuestions,
-} from "../controllers/questionController";
+} from "../../controllers/question/questionController";
 
 const router = express.Router();
 
