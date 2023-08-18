@@ -4,6 +4,7 @@ import http from "http";
 import app from "./app";
 
 const server = http.createServer(app);
+// "build": "npm-run-all format lint clean && tsc", put this in you package.json file
 
 async function startServer() {
   try {
