@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import Subject from "../model/subjectModal";
 
 export async function getAllSubject(req: Request, res: Response) {

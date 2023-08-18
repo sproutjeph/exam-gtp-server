@@ -1,4 +1,3 @@
-import cookieParser from "cookie-parser";
 import compression from "compression";
 import bodyParser from "body-parser";
 import express from "express";

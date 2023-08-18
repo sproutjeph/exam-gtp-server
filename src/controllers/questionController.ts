@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import Question from "../model/questionsModal";
 import Subject from "../model/subjectModal";
 
