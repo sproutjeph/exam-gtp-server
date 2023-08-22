@@ -1,5 +1,6 @@
 import subjectRouter from "./routes/subject/subjectRoute";
 import questionRouter from "./routes/question/questionRoute";
+import userRouter from "./routes/user/userRoute";
 import compression from "compression";
 import bodyParser from "body-parser";
 import express from "express";
@@ -22,5 +23,6 @@ app.use(compression());
 
 app.use("/api/v1/subjects", subjectRouter);
 app.use("/api/v1/questions", questionRouter);
+app.use("/api/v1/users", userRouter);
 
 export default app;
