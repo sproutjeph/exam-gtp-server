@@ -1,18 +1,21 @@
 import { NextFunction, Request, Response } from "express";
 import { CatchAsyncError } from "./catchAsyncErrors";
 import {
+  NotFoundError,
   // NotFoundError,
   UnauthenticatedError,
   UnauthorizedError,
 } from "../utils/ErrorHandler";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ACCESS_TOKEN } from "../config/server.config";
-// import { redis } from "../utils/redis";
-// import UserModel from "../model/user/user";
-// import { redis } from "../utils/redis";
+import UserModel, { IUser } from "../model/user/user";
+
+interface TypedRequest extends Request {
+  user: IUser;
+}
 
 export const isAuthenticated = CatchAsyncError(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: TypedRequest, res: Response, next: NextFunction) => {
     const { access_token } = req.cookies;
 
     if (!access_token) {
@@ -29,14 +32,13 @@ export const isAuthenticated = CatchAsyncError(
     }
     console.log(decodeed.id);
 
-    // const user = await redis.get(decodeed.id);
-    // const user = await UserModel.findOne({decodeed.id})
+    const user = UserModel.findOne(decodeed.id);
 
-    // if (!user) {
-    //   throw new NotFoundError("please login to access this resources");
-    // }
+    if (!user) {
+      throw new NotFoundError("please login to access this resources");
+    }
 
-    // req.user = JSON.parse(user);
+    req.user = user as unknown as IUser;
 
     next();
   }
@@ -44,11 +46,11 @@ export const isAuthenticated = CatchAsyncError(
 
 // validate user role
 
-// export const authorizeRoles = (...roles: string[]) => {
-//   return (req: Request, res: Response, next: NextFunction) => {
-//     if (!roles.includes(req.user?.role || "")) {
-//       throw new UnauthorizedError("you are not authorized");
-//     }
-//     next();
-//   };
-// };
+export const authorizeRoles = (...roles: string[]) => {
+  return (req: TypedRequest, res: Response, next: NextFunction) => {
+    if (!roles.includes(req.user?.role || "")) {
+      throw new UnauthorizedError("you are not authorized");
+    }
+    next();
+  };
+};

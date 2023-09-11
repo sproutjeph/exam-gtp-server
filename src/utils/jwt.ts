@@ -4,7 +4,6 @@ import {
 } from "../config/server.config";
 import { IUser } from "../model/user/user";
 import { Response } from "express";
-// import { redis } from "./redis";
 
 interface ITokenOption {
   expires: Date;
