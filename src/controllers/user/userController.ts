@@ -46,7 +46,7 @@ export async function getApiUseageCount(req: Request, res: Response) {
     const user = await User.findOne({ userId });
     if (user) {
       const apiUseageCount = user.apiUseageCount;
-      res.status(200).json({ message: "created", data: apiUseageCount });
+      res.status(200).json({ message: "found", data: apiUseageCount });
     }
   } catch (error) {
     console.error("Can not find user:", error);

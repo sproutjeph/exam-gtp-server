@@ -1,5 +1,6 @@
 import subjectRouter from "./routes/subject/subjectRoute";
 import questionRouter from "./routes/question/questionRoute";
+import { ErrorMiddleware } from "./middleware/error";
 import userRouter from "./routes/user/userRoute";
 import compression from "compression";
 import bodyParser from "body-parser";
@@ -24,5 +25,7 @@ app.use(compression());
 app.use("/api/v1/subjects", subjectRouter);
 app.use("/api/v1/questions", questionRouter);
 app.use("/api/v1/users", userRouter);
+
+app.use(ErrorMiddleware);
 
 export default app;
