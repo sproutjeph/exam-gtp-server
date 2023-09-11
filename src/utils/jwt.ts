@@ -4,7 +4,7 @@ import {
 } from "../config/server.config";
 import { IUser } from "../model/user/user";
 import { Response } from "express";
-
+import redisClient from "./redis";
 interface ITokenOption {
   expires: Date;
   maxAge: number;
@@ -32,11 +32,15 @@ export const refreshTokenOptions: ITokenOption = {
   sameSite: "lax",
 };
 
-export const sendToken = (user: IUser, statusCode: number, res: Response) => {
+export const sendToken = async (
+  user: IUser,
+  statusCode: number,
+  res: Response
+) => {
   const accessToken = user.SignAccessToken();
   const refreshToken = user.SignRefreshToken();
   // upload session to redis
-  // redis.set(user._id, JSON.stringify(user) as any);
+  await redisClient.set(user._id, JSON.stringify(user) as any);
 
   // only set secure to true in prod
   if (process.env.NODE_ENV === "production") {
