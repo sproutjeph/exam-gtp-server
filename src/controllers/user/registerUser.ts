@@ -35,6 +35,8 @@ export const registerUser = CatchAsyncError(async function (
     const activationToken = createActivationToken(user);
     const activationCode = activationToken.activationCode;
     const data = { user: { name: user.name }, activationCode };
+    console.log(activationCode);
+
     await ejs.renderFile(
       path.join(__dirname, "../../mails/activation-mail.ejs"),
       data
