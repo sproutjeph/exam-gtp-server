@@ -21,3 +21,5 @@ export const SMTP_PORT = process.env.SMTP_PORT;
 export const SMTP_SERVER = process.env.SMTP_SERVER;
 export const SMTP_MAIL = process.env.SMTP_MAIL;
 export const SMTP_PASSWORD = process.env.SMTP_PASSWORD;
+
+export const REDIS_URL = process.env.REDIS_URL;
