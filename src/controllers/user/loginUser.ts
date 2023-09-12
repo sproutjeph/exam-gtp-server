@@ -4,12 +4,17 @@ import { BadRequestError, NotFoundError } from "../../utils/ErrorHandler";
 import UserModel from "../../model/user/user";
 import { sendToken } from "../../utils/jwt";
 
+interface ILoginBody {
+  email: string;
+  password: string;
+}
+
 export const loginUser = CatchAsyncError(async function (
   req: Request,
   res: Response
 ) {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body as ILoginBody;
     if (!email || !password) {
       throw new BadRequestError(`Email and password is required`);
     }

@@ -8,7 +8,8 @@ import {
 } from "../utils/ErrorHandler";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ACCESS_TOKEN } from "../config/server.config";
-import UserModel, { IUser } from "../model/user/user";
+import { IUser } from "../model/user/user";
+import redisClient from "../utils/redis";
 
 interface TypedRequest extends Request {
   user: IUser;
@@ -16,29 +17,30 @@ interface TypedRequest extends Request {
 
 export const isAuthenticated = CatchAsyncError(
   async (req: TypedRequest, res: Response, next: NextFunction) => {
-    const { access_token } = req.cookies;
+    const access_token = req.headers?.cookie
+      ?.split(";")[0]
+      .split("=")[1] as string;
 
     if (!access_token) {
       throw new UnauthenticatedError("Please login ");
     }
 
-    const decodeed = jwt.verify(
+    const decoded = jwt.verify(
       access_token,
       ACCESS_TOKEN as string
     ) as JwtPayload;
 
-    if (!decodeed) {
+    if (!decoded) {
       throw new UnauthorizedError("access token is not valid");
     }
-    console.log(decodeed.id);
-
-    const user = UserModel.findOne(decodeed.id);
+    console.log(decoded.id);
+    const user = await redisClient.get(decoded.id);
 
     if (!user) {
       throw new NotFoundError("please login to access this resources");
     }
 
-    req.user = user as unknown as IUser;
+    req.user = JSON.parse(user);
 
     next();
   }
