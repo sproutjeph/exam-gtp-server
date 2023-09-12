@@ -40,6 +40,7 @@ export const sendToken = async (
   const accessToken = user.SignAccessToken();
   const refreshToken = user.SignRefreshToken();
   // upload session to redis
+
   await redisClient.set(user._id, JSON.stringify(user) as any);
 
   // only set secure to true in prod

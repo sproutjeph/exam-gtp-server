@@ -33,6 +33,7 @@ export const isAuthenticated = CatchAsyncError(
     if (!decoded) {
       throw new UnauthorizedError("access token is not valid");
     }
+
     const user = await redisClient.get(decoded.id);
 
     if (!user) {
