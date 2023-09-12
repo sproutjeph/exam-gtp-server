@@ -1,19 +1,14 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import { CatchAsyncError } from "./catchAsyncErrors";
 import {
   NotFoundError,
-  // NotFoundError,
   UnauthenticatedError,
   UnauthorizedError,
 } from "../utils/ErrorHandler";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ACCESS_TOKEN } from "../config/server.config";
-import { IUser } from "../model/user/user";
 import redisClient from "../utils/redis";
-
-interface TypedRequest extends Request {
-  user: IUser;
-}
+import { TypedRequest } from "../utils/types";
 
 export const isAuthenticated = CatchAsyncError(
   async (req: TypedRequest, res: Response, next: NextFunction) => {
@@ -49,8 +44,9 @@ export const isAuthenticated = CatchAsyncError(
 // validate user role
 
 export const authorizeRoles = (...roles: string[]) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (!roles.includes(req.user?.role || "")) {
+  return (req: TypedRequest, res: Response, next: NextFunction) => {
+    const role = req.user?.role;
+    if (!roles.includes(role || "")) {
       throw new UnauthorizedError("you are not authorized");
     }
     next();

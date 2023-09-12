@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 import {
   BadRequestError,
@@ -6,6 +6,7 @@ import {
 } from "../../utils/ErrorHandler";
 import UserModel from "../../model/user/user";
 import redisClient from "../../utils/redis";
+import { TypedRequest } from "../../utils/types";
 
 interface IUpdateUserPassword {
   oldPassword: string;
@@ -13,7 +14,7 @@ interface IUpdateUserPassword {
 }
 
 export const updateUserPassword = CatchAsyncError(
-  async (req: Request, res: Response) => {
+  async (req: TypedRequest, res: Response) => {
     try {
       const { oldPassword, newPassword } = req.body as IUpdateUserPassword;
 

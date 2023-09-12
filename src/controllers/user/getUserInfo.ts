@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 import { BadRequestError } from "../../utils/ErrorHandler";
 import { getUserById } from "../../services/user.services";
+import { TypedRequest } from "../../utils/types";
 
 export const getUserInfo = CatchAsyncError(async function (
-  req: Request,
+  req: TypedRequest,
   res: Response
 ) {
   try {
