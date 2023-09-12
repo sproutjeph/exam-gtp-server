@@ -68,7 +68,7 @@ interface IActivationToken {
 }
 
 export const createActivationToken = (user: any): IActivationToken => {
-  const activationCode = Math.floor(Math.random() * 10000).toString();
+  const activationCode = generateOTP();
 
   const token = jwt.sign(
     {
@@ -82,6 +82,13 @@ export const createActivationToken = (user: any): IActivationToken => {
   );
   return { token, activationCode };
 };
+
+function generateOTP(): string {
+  const min = 100000; // Minimum 6-digit number
+  const max = 999999; // Maximum 6-digit number
+  const otp = Math.floor(Math.random() * (max - min + 1)) + min;
+  return otp.toString();
+}
 
 // export async function increamentApiUsage(userId: string) {
 //   try {
