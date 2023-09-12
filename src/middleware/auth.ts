@@ -49,7 +49,7 @@ export const isAuthenticated = CatchAsyncError(
 // validate user role
 
 export const authorizeRoles = (...roles: string[]) => {
-  return (req: TypedRequest, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     if (!roles.includes(req.user?.role || "")) {
       throw new UnauthorizedError("you are not authorized");
     }
