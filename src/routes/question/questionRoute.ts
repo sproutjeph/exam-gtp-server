@@ -1,14 +1,12 @@
 import express from "express";
-import {
-  getAllQuestions,
-  getQuestionsbyQeury,
-  uploadQuestions,
-} from "../../controllers/question/questionController";
+import { uploadQuestion } from "../../controllers/question/uploadQuestion";
+// import { authorizeRoles, isAuthenticated } from "../../middleware/auth";
 
 const router = express.Router();
 
-router.route("/").get(getAllQuestions);
-router.route("/:examType/:examYear/:subject").get(getQuestionsbyQeury);
-router.route("/").post(uploadQuestions);
+router.post("/upload-question", uploadQuestion);
+
+// router.route("/").get(getAllQuestions);
+// router.route("/:examType/:examYear/:subject").get(getQuestionsbyQeury);
 
 export default router;
