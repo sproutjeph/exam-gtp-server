@@ -1,12 +1,12 @@
 import express from "express";
 import {
-  getAllSubject,
-  getExamSubjects,
+  getAllSubjects,
+  getSubjectByExamName,
 } from "../../controllers/subject/subjectController";
 
 const router = express.Router();
 
-router.route("/").get(getAllSubject);
-router.route("/:examName").get(getExamSubjects);
+router.get("/get-all-subjects", getAllSubjects);
+router.get("/get-subject/:examName", getSubjectByExamName);
 
 export default router;

@@ -1,8 +1,12 @@
+import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 import SubjectModel from "../../model/subject/subjectModel";
 import { BadRequestError } from "../../utils/ErrorHandler";
 import { Request, Response } from "express";
 
-export async function getAllSubject(req: Request, res: Response) {
+export const getAllSubjects = CatchAsyncError(async function (
+  req: Request,
+  res: Response
+) {
   try {
     const subjects = await SubjectModel.find({});
 
@@ -10,9 +14,12 @@ export async function getAllSubject(req: Request, res: Response) {
   } catch (error) {
     throw new BadRequestError(`${error}`);
   }
-}
+});
 
-export async function getExamSubjects(req: Request, res: Response) {
+export const getSubjectByExamName = CatchAsyncError(async function (
+  req: Request,
+  res: Response
+) {
   try {
     const { examName } = req.params;
 
@@ -24,4 +31,4 @@ export async function getExamSubjects(req: Request, res: Response) {
   } catch (error) {
     throw new BadRequestError(`${error}`);
   }
-}
+});

@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import QuestionModel from "../../model/question/questionModel";
 import { BadRequestError } from "../../utils/ErrorHandler";
+import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 
-export async function getQuestionsbyQeury(req: Request, res: Response) {
-  const examType = req.params.examType;
-  const examYear = req.params.examYear;
-  const subject = req.params.subject;
+export const getQuestionsbyQeury = CatchAsyncError(async function (
+  req: Request,
+  res: Response
+) {
+  const { examType, examYear, subject } = req.params;
 
   console.log(examType, examYear, subject);
 
@@ -20,4 +22,4 @@ export async function getQuestionsbyQeury(req: Request, res: Response) {
   } catch (error: any) {
     throw new BadRequestError(`${error.message}`);
   }
-}
+});
