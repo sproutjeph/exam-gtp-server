@@ -1,8 +1,12 @@
-import { Request, Response } from "express";
-import { BadRequestError } from "../../utils/ErrorHandler";
+import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 import QuestionModel from "../../model/question/questionModel";
+import { BadRequestError } from "../../utils/ErrorHandler";
+import { Request, Response } from "express";
 
-export async function getAllQuestions(req: Request, res: Response) {
+export const getAllQuestions = CatchAsyncError(async function (
+  req: Request,
+  res: Response
+) {
   try {
     const questions = await QuestionModel.find({});
 
@@ -10,4 +14,4 @@ export async function getAllQuestions(req: Request, res: Response) {
   } catch (error: any) {
     throw new BadRequestError(`${error.message}`);
   }
-}
+});

@@ -20,34 +20,31 @@ export const uploadQuestion = CatchAsyncError(async function (
     }
 
     const questionExists = await QuestionModel.findOne({
-      question: question.question,
+      question: { $regex: new RegExp(question.question) },
     });
 
     if (questionExists) {
       throw new BadRequestError("Question already exists");
-      // return res.status(400).json({
-      //   message: "question already exists",
-      // });
     }
 
     const newQuestion = await QuestionModel.create(question);
 
-    const subject = question.subject;
-    const examType = question.examType;
-    const examYear = question.examYear;
-
     const newSubject = {
-      name: subject,
-      exam: examType,
-      examYears: [{ examYear: Number(examYear), isActive: true }],
+      name: question.subject,
+      exam: question.examType,
+      examYears: [{ examYear: Number(question.examYear), isActive: true }],
     } as ISubject;
 
     const existingsubject: any = await SubjectModel.findOne({
-      exam: { $regex: examType, $options: "i" },
-      subject: { $regex: new RegExp(subject, "i") },
+      name: { $regex: new RegExp(newSubject.name, "i") },
+      exam: { $regex: new RegExp(newSubject.exam, "i") },
     });
+
     if (existingsubject) {
-      existingsubject.examYears?.push({ examYear: examYear, isActive: true });
+      existingsubject.examYears?.push({
+        examYear: question.examYear,
+        isActive: true,
+      });
       await existingsubject.save();
     } else {
       await SubjectModel.create(newSubject);
