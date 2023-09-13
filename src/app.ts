@@ -1,5 +1,6 @@
 // import subjectRouter from "./routes/subject/subjectRoute";
 // import questionRouter from "./routes/question/questionRoute";
+import analyticsRouter from "./routes/analytics/analyticsRoute";
 import { ErrorMiddleware } from "./middleware/error";
 import userRouter from "./routes/user/userRoute";
 import compression from "compression";
@@ -22,7 +23,7 @@ app.use(compression());
 // app.use(bodyParser.json());
 // app.use(cookieParser());
 
-app.use("/api/v1", userRouter);
+app.use("/api/v1", userRouter, analyticsRouter);
 // app.use("/api/v1/subjects", subjectRouter);
 // app.use("/api/v1/questions", questionRouter);
 
