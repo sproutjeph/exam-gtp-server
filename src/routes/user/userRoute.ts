@@ -8,6 +8,7 @@ import { getUserInfo } from "../../controllers/user/getUserInfo";
 import { updateUserPassword } from "../../controllers/user/updateUserPassword";
 import { getAllUsers } from "../../controllers/user/getAllUsers";
 import { updateUserRole } from "../../controllers/user/updateUserRole";
+import { deleteUser } from "../../controllers/user/deleteUser";
 
 const router = express.Router();
 
@@ -29,6 +30,12 @@ router.put(
   isAuthenticated,
   authorizeRoles("admin"),
   updateUserRole
+);
+router.delete(
+  "/delete-user:id",
+  isAuthenticated,
+  authorizeRoles("admin"),
+  deleteUser
 );
 // router.route("/api-useage-count").post(getApiUseageCount);
 
