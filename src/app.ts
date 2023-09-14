@@ -1,8 +1,8 @@
-import subjectRouter from "./routes/subject/subjectRoute";
-import questionRouter from "./routes/question/questionRoute";
-import analyticsRouter from "./routes/analytics/analyticsRoute";
+import subjectRouter from "./routes/subjectRoute";
+import questionRouter from "./routes/questionRoute";
+import analyticsRouter from "./routes/analyticsRoute";
 import { ErrorMiddleware } from "./middleware/error";
-import userRouter from "./routes/user/userRoute";
+import userRouter from "./routes/userRoute";
 import compression from "compression";
 import bodyParser from "body-parser";
 import express from "express";
