@@ -12,16 +12,14 @@ import { TypedRequest } from "../utils/types";
 
 export const isAuthenticated = CatchAsyncError(
   async (req: TypedRequest, res: Response, next: NextFunction) => {
-    const access_token = req.headers?.cookie
-      ?.split(";")[0]
-      .split("=")[1] as string;
+    const accessToken = req.cookies.access_token;
 
-    if (!access_token) {
-      throw new UnauthenticatedError("Please login ");
+    if (!accessToken) {
+      throw new UnauthenticatedError("Authentication required ");
     }
 
     const decoded = jwt.verify(
-      access_token,
+      accessToken,
       ACCESS_TOKEN as string
     ) as JwtPayload;
 

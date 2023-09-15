@@ -38,6 +38,7 @@ export const sendToken = async (
   res: Response
 ) => {
   const accessToken = user.SignAccessToken();
+
   const refreshToken = user.SignRefreshToken();
   // upload session to redis
 

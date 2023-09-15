@@ -17,7 +17,6 @@ router.post("/activate-user", activateUser);
 router.post("/login-user", loginUser);
 router.get("/logout-user", isAuthenticated, logoutUser);
 router.get("/me", isAuthenticated, getUserInfo);
-router.get("/me", isAuthenticated, getUserInfo);
 router.put("/update-password", isAuthenticated, updateUserPassword);
 router.get(
   "/get-all-users",

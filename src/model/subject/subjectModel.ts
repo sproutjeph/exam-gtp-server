@@ -16,7 +16,10 @@ const subjectSchema = new Schema<ISubject>(
     exam: String,
     examYears: [
       {
-        examYear: Number,
+        examYear: {
+          type: Number,
+          unique: true,
+        },
         isActive: Boolean,
       },
     ],
