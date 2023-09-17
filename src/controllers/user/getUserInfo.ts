@@ -10,7 +10,6 @@ export const getUserInfo = CatchAsyncError(async function (
 ) {
   try {
     const userId = req.user?._id;
-
     getUserById(userId, res);
   } catch (error: any) {
     throw new BadRequestError(`${error.message}`);

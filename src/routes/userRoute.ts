@@ -9,6 +9,8 @@ import { updateUserPassword } from "../controllers/user/updateUserPassword";
 import { getAllUsers } from "../controllers/user/getAllUsers";
 import { updateUserRole } from "../controllers/user/updateUserRole";
 import { deleteUser } from "../controllers/user/deleteUser";
+import { updateAccessToken } from "../controllers/user/updateAccessToken";
+import { socialAuth } from "../controllers/user/socialAuth";
 
 const router = express.Router();
 
@@ -24,6 +26,7 @@ router.get(
   authorizeRoles("admin"),
   getAllUsers
 );
+router.get("/refresh", updateAccessToken);
 router.put(
   "/update-user-role",
   isAuthenticated,
@@ -36,6 +39,7 @@ router.delete(
   authorizeRoles("admin"),
   deleteUser
 );
+router.post("/social-auth", isAuthenticated, socialAuth);
 // router.route("/api-useage-count").post(getApiUseageCount);
 
 export default router;
