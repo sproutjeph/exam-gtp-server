@@ -28,6 +28,6 @@ const subjectSchema = new Schema<ISubject>(
 );
 
 const SubjectModel: Model<ISubject> =
-  mongoose.models.User || mongoose.model("Subject", subjectSchema);
+  mongoose.models.Subject || mongoose.model("Subject", subjectSchema);
 
 export default SubjectModel;
