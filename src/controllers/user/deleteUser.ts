@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 import { BadRequestError, NotFoundError } from "../../utils/ErrorHandler";
-import UserModel from "../../model/user/user";
+import UserModel from "@/model/user/user";
 
 export const deleteUser = CatchAsyncError(async function (
   req: Request,

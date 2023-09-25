@@ -1,14 +1,14 @@
-import { NextFunction, Response } from "express";
-import { CatchAsyncError } from "./catchAsyncErrors";
 import {
   NotFoundError,
   UnauthenticatedError,
   UnauthorizedError,
 } from "../utils/ErrorHandler";
+import { CatchAsyncError } from "./catchAsyncErrors";
+import { ACCESS_TOKEN } from "@/config/server.config";
+import { NextFunction, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { ACCESS_TOKEN } from "../config/server.config";
-import redisClient from "../utils/redis";
-import { TypedRequest } from "../utils/types";
+import { TypedRequest } from "@/utils/types";
+import redisClient from "@/utils/redis";
 
 export const isAuthenticated = CatchAsyncError(
   async (req: TypedRequest, res: Response, next: NextFunction) => {

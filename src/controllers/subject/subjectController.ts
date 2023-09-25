@@ -1,6 +1,6 @@
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import SubjectModel from "../../model/subject/subjectModel";
-import { BadRequestError } from "../../utils/ErrorHandler";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import SubjectModel from "@/model/subject/subjectModel";
+import { BadRequestError } from "@/utils/ErrorHandler";
 import { Request, Response } from "express";
 
 export const getAllSubjects = CatchAsyncError(async function (

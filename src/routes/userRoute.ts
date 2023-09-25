@@ -1,17 +1,17 @@
-import { activateUser } from "../controllers/user/activateUser";
-import { loginUser } from "../controllers/user/loginUser";
-import { logoutUser } from "../controllers/user/logoutUser";
-import { registerUser } from "../controllers/user/registerUser";
-import express from "express";
+import { updateUserPassword } from "@/controllers/user/updateUserPassword";
+import { updateAccessToken } from "@/controllers/user/updateAccessToken";
+import { updateUserVatar } from "@/controllers/user/updateUserAvatar";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
-import { getUserInfo } from "../controllers/user/getUserInfo";
-import { updateUserPassword } from "../controllers/user/updateUserPassword";
-import { getAllUsers } from "../controllers/user/getAllUsers";
-import { updateUserRole } from "../controllers/user/updateUserRole";
-import { deleteUser } from "../controllers/user/deleteUser";
-import { updateAccessToken } from "../controllers/user/updateAccessToken";
-import { socialAuth } from "../controllers/user/socialAuth";
-import { updateUserVatar } from "../controllers/user/updateUserAvatar";
+import { updateUserRole } from "@/controllers/user/updateUserRole";
+import { activateUser } from "@/controllers/user/activateUser";
+import { registerUser } from "@/controllers/user/registerUser";
+import { getUserInfo } from "@/controllers/user/getUserInfo";
+import { getAllUsers } from "@/controllers/user/getAllUsers";
+import { logoutUser } from "@/controllers/user/logoutUser";
+import { deleteUser } from "@/controllers/user/deleteUser";
+import { socialAuth } from "@/controllers/user/socialAuth";
+import { loginUser } from "@/controllers/user/loginUser";
+import express from "express";
 
 const router = express.Router();
 

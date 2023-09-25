@@ -1,7 +1,7 @@
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { BadRequestError } from "../../utils/ErrorHandler";
-import { TypedRequest } from "../../utils/types";
-import UserModel from "../../model/user/user";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { BadRequestError } from "@/utils/ErrorHandler";
+import { TypedRequest } from "@/utils/types";
+import UserModel from "@/model/user/user";
 import { Response } from "express";
 
 export const getApiUseageCount = CatchAsyncError(

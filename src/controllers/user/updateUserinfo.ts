@@ -1,9 +1,9 @@
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { BadRequestError } from "@/utils/ErrorHandler";
+import { TypedRequest } from "@/utils/types";
+import UserModel from "@/model/user/user";
+import redisClient from "@/utils/redis";
 import { Response } from "express";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import UserModel from "../../model/user/user";
-import { BadRequestError } from "../../utils/ErrorHandler";
-import redisClient from "../../utils/redis";
-import { TypedRequest } from "../../utils/types";
 
 interface IUpdataUserInfo {
   name?: string;

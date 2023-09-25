@@ -5,7 +5,7 @@ import {
   SMTP_PASSWORD,
   SMTP_PORT,
   SMTP_SERVER,
-} from "../config/server.config";
+} from "@/config/server.config";
 import path from "path";
 import ejs from "ejs";
 

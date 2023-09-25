@@ -1,8 +1,8 @@
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { ACTIVATION_SECRET } from "../../config/server.config";
-import { BadRequestError } from "../../utils/ErrorHandler";
-import UserModel from "../../model/user/user";
-import sendEmail from "../../utils/sendMail";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { ACTIVATION_SECRET } from "@/config/server.config";
+import { BadRequestError } from "@/utils/ErrorHandler";
+import UserModel from "@/model/user/user";
+import sendEmail from "@/utils/sendMail";
 import { Request, Response } from "express";
 import jwt, { Secret } from "jsonwebtoken";
 import path from "path";

@@ -1,7 +1,7 @@
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/config/server.config";
 import mongoose, { Document, Model, Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../config/server.config";
 
 const HASH_VALUE = 10;
 

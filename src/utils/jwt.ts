@@ -1,8 +1,8 @@
 import {
   ACCESS_TOKEN_EXPIRE,
   REFRESH_TOKEN_EXPIRE,
-} from "../config/server.config";
-import { IUser } from "../model/user/user";
+} from "@/config/server.config";
+import { IUser } from "@/model/user/user";
 import { Response } from "express";
 import redisClient from "./redis";
 interface ITokenOption {

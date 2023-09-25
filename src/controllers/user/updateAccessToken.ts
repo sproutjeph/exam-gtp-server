@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { UnauthenticatedError } from "../../utils/ErrorHandler";
-import jwt, { JwtPayload } from "jsonwebtoken";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../config/server.config";
 import { accessTokenOptions, refreshTokenOptions } from "../../utils/jwt";
-import UserModel, { IUser } from "../../model/user/user";
-import redisClient from "../../utils/redis";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/config/server.config";
+import { UnauthenticatedError } from "@/utils/ErrorHandler";
+import UserModel, { IUser } from "@/model/user/user";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { Request, Response } from "express";
+import redisClient from "@/utils/redis";
 
 interface TypedRequest extends Request {
   user: IUser;

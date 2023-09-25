@@ -1,6 +1,6 @@
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { UnauthenticatedError } from "../../utils/ErrorHandler";
-import redisClient from "../../utils/redis";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { UnauthenticatedError } from "@/utils/ErrorHandler";
+import redisClient from "@/utils/redis";
 import { Response } from "express";
 
 export const logoutUser = CatchAsyncError(async function (

@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { BadRequestError } from "../../utils/ErrorHandler";
-import UserModel, { IUser } from "../../model/user/user";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { BadRequestError } from "@/utils/ErrorHandler";
+import UserModel, { IUser } from "@/model/user/user";
 import jwt, { Secret } from "jsonwebtoken";
-import { ACTIVATION_SECRET } from "../../config/server.config";
+import { ACTIVATION_SECRET } from "@/config/server.config";
 
 interface IActivationRequest {
   activationToken: string;

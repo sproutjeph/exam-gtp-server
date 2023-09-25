@@ -1,8 +1,8 @@
+import { BadRequestError, NotFoundError } from "@/utils/ErrorHandler";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
 import { Request, Response } from "express";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { BadRequestError, NotFoundError } from "../../utils/ErrorHandler";
-import UserModel from "../../model/user/user";
-import { sendToken } from "../../utils/jwt";
+import UserModel from "@/model/user/user";
+import { sendToken } from "@/utils/jwt";
 
 interface ILoginBody {
   email: string;

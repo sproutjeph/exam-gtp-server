@@ -1,10 +1,10 @@
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import { Response } from "express";
-import UserModel from "../../model/user/user";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { BadRequestError } from "@/utils/ErrorHandler";
+import { TypedRequest } from "@/utils/types";
+import UserModel from "@/model/user/user";
+import redisClient from "@/utils/redis";
 import cloudinary from "cloudinary";
-import { TypedRequest } from "../../utils/types";
-import redisClient from "../../utils/redis";
-import { BadRequestError } from "../../utils/ErrorHandler";
+import { Response } from "express";
 
 export const updateUserVatar = CatchAsyncError(
   async (req: TypedRequest, res: Response) => {

@@ -1,7 +1,7 @@
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import QuestionModel from "@/model/question/questionModel";
+import { BadRequestError } from "@/utils/ErrorHandler";
 import { Request, Response } from "express";
-import QuestionModel from "../../model/question/questionModel";
-import { BadRequestError } from "../../utils/ErrorHandler";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 
 export const getQuestionsbyQeury = CatchAsyncError(async function (
   req: Request,

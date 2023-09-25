@@ -2,7 +2,7 @@ import express from "express";
 import {
   getAllSubjects,
   getSubjectByExamName,
-} from "../controllers/subject/subjectController";
+} from "@/controllers/subject/subjectController";
 
 const router = express.Router();
 

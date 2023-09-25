@@ -1,12 +1,12 @@
-import { Response } from "express";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
 import {
   BadRequestError,
   UnauthenticatedError,
 } from "../../utils/ErrorHandler";
-import UserModel from "../../model/user/user";
-import redisClient from "../../utils/redis";
-import { TypedRequest } from "../../utils/types";
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { TypedRequest } from "@/utils/types";
+import UserModel from "@/model/user/user";
+import redisClient from "@/utils/redis";
+import { Response } from "express";
 
 interface IUpdateUserPassword {
   oldPassword: string;

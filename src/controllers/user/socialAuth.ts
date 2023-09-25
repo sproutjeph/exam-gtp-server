@@ -1,8 +1,8 @@
+import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
+import { BadRequestError } from "@/utils/ErrorHandler";
 import { Request, Response } from "express";
-import { CatchAsyncError } from "../../middleware/catchAsyncErrors";
-import UserModel from "../../model/user/user";
-import { sendToken } from "../../utils/jwt";
-import { BadRequestError } from "../../utils/ErrorHandler";
+import UserModel from "@/model/user/user";
+import { sendToken } from "@/utils/jwt";
 
 interface ISocailAuthBody {
   name: string;
