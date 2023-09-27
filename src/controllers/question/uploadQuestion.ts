@@ -35,23 +35,32 @@ export const uploadQuestion = CatchAsyncError(async function (
       examYears: [{ examYear: Number(question.examYear), isActive: true }],
     } as ISubject;
 
-    const existingsubject: any = await SubjectModel.findOne({
-      name: { $regex: new RegExp(newSubject.name, "i") },
-      exam: { $regex: new RegExp(newSubject.exam, "i") },
-    });
-
-    if (existingsubject) {
-      existingsubject.examYears?.push({
-        examYear: question.examYear,
-        isActive: true,
-      });
-      await existingsubject.save();
-    } else {
-      await SubjectModel.create(newSubject);
-    }
+    await SubjectModel.findOneAndUpdate(
+      {
+        name: { $regex: new RegExp(newSubject.name, "i") }, // Case-insensitive search
+        exam: { $regex: new RegExp(newSubject.exam, "i") }, // Case-insensitive search
+        "examYears.examYear": { $ne: Number(question.examYear) },
+      },
+      {
+        $addToSet: {
+          examYears: {
+            $each: [{ examYear: Number(question.examYear), isActive: true }],
+          },
+        },
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    );
 
     res.status(201).json({ message: "created", data: newQuestion });
   } catch (error: any) {
+    console.log(error.codeName);
+    if (error.codeName === "DuplicateKey") {
+      // if the duplicate key error is found, then return a success message because the question was created but the examYears array was not updated
+      res.status(201).json({ message: "created" });
+    }
     throw new BadRequestError(`${error.message}`);
   }
 });
