@@ -2,7 +2,7 @@ import { accessTokenOptions, refreshTokenOptions } from "../../utils/jwt";
 import { CatchAsyncError } from "@/middleware/catchAsyncErrors";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "@/config/server.config";
 import { UnauthenticatedError } from "@/utils/ErrorHandler";
-import UserModel, { IUser } from "@/model/user/user";
+import { IUser } from "@/model/user/user";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Request, Response } from "express";
 import redisClient from "@/utils/redis";
@@ -26,11 +26,12 @@ export const updateAccessToken = CatchAsyncError(async function (
     if (!decoded) {
       throw new UnauthenticatedError(message);
     }
-    const session = await UserModel.findOne(decoded.id);
+    const session = await redisClient.get(decoded.id as string);
+
     if (!session) {
       throw new UnauthenticatedError("please login to access this resources");
     }
-    const user = session;
+    const user = JSON.parse(session);
     const accessToken = jwt.sign({ id: user._id }, ACCESS_TOKEN as string, {
       expiresIn: "5m",
     });
