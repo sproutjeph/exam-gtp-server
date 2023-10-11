@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "mails/**/*"],
   "exclude": ["src/**/*.test.ts"]
 }
