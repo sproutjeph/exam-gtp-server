@@ -20,6 +20,7 @@ export const socialAuth = CatchAsyncError(
           name,
           email,
           avatar,
+          isVerified: true,
         });
         sendToken(newUser, 201, res);
       } else {

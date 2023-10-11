@@ -40,7 +40,7 @@ router.delete(
   authorizeRoles("admin"),
   deleteUser
 );
-router.post("/social-auth", isAuthenticated, socialAuth);
+router.post("/social-auth", socialAuth);
 router.put("/update-avatar", isAuthenticated, updateUserVatar);
 
 // router.route("/api-useage-count").post(getApiUseageCount);
