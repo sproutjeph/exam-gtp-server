@@ -39,12 +39,12 @@ export const uploadQuestion = CatchAsyncError(async function (
       {
         name: { $regex: new RegExp(newSubject.name, "i") }, // Case-insensitive search
         exam: { $regex: new RegExp(newSubject.exam, "i") }, // Case-insensitive search
-        "examYears.examYear": { $ne: Number(question.examYear) },
       },
       {
         $addToSet: {
           examYears: {
-            $each: [{ examYear: Number(question.examYear), isActive: true }],
+            examYear: Number(question.examYear),
+            isActive: true,
           },
         },
       },
