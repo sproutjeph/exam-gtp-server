@@ -39,7 +39,6 @@ export const uploadQuestion = CatchAsyncError(async function (
       {
         name: { $regex: new RegExp(newSubject.name, "i") },
         exam: { $regex: new RegExp(newSubject.exam, "i") },
-        "examYears.examYear": { $ne: Number(question.examYear) },
       },
       {
         $setOnInsert: { name: newSubject.name, exam: newSubject.exam },
